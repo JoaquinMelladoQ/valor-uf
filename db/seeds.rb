@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'csv'
 
-CSV.foreach(Rails.root.join('lib/uf_2019.csv'), headers: true) do |row|
-    Uf.create({
-      date: row[0],
-      value: row[1]
-    })
+CSV.open('uf_2019.csv', {col_sep: "\t"}).readlines.each do |j|
+  Uf.create(
+    date: j[0],
+    value: j[1].to_i
+  )
 end
